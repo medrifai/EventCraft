@@ -1,4 +1,4 @@
-package ma.eventcraft.model.enums;
+package ma.eventcraft.models.enums;
 
 public enum MediaType {
 
