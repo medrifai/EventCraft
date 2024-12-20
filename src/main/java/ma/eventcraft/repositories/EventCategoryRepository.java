@@ -25,7 +25,5 @@ public interface EventCategoryRepository extends JpaRepository<EventCategory, Lo
     List<EventCategory> findCategoriesWithActiveEvents();
 
 
-
-
     boolean existsByName(String name);
 }
