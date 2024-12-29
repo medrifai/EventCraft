@@ -1,42 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" th:href="@{/imgs/ticketer_logo.svg}" />
     <title>Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="flex items-center justify-center min-h-screen bg-gray-100">
-<div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-    <h2 class="text-2xl font-bold text-center text-gray-800">Login to EvenCraft</h2>
-    <form action="/login" method="POST" class="mt-6">
+  </head>
+  <body
+    class="flex items-center justify-center min-h-screen bg-gray-900 text-gray-200">
+    <div class="w-full max-w-md bg-gray-800 rounded-lg shadow-md p-8">
+      <h2 class="text-2xl font-bold text-center">Login to EvenCraft</h2>
+      <form th:action="@{/login}" method="POST" class="mt-6">
         <div class="mb-4">
-            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-            <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+          <label for="username" class="block text-sm font-medium text-gray-400"
+            >Email</label
+          >
+          <input
+            type="email"
+            id="username"
+            name="username"
+            required
+            class="w-full mt-1 px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent" />
         </div>
         <div class="mb-6">
-            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-            <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    required
-                    class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+          <label for="password" class="block text-sm font-medium text-gray-400"
+            >Password</label
+          >
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            class="w-full mt-1 px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent" />
         </div>
         <button
-                type="submit"
-                class="w-full px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2">
-            Login
+          type="submit"
+          class="w-full px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2">
+          Login
         </button>
-    </form>
-    <p class="mt-4 text-sm text-gray-600 text-center">
-        Don't have an account? <a href="/signup" class="text-blue-500 hover:underline">Sign up here</a>.
-    </p>
-</div>
-</body>
+      </form>
+      <p class="mt-4 text-sm text-gray-400 text-center">
+        Don't have an account?
+        <a href="/signup" class="text-blue-400 hover:underline">Sign up here</a
+        >.
+      </p>
+    </div>
+  </body>
 </html>

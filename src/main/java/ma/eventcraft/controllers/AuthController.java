@@ -1,7 +1,7 @@
 package ma.eventcraft.controllers;
 
-import ma.eventcraft.models.User;
-import ma.eventcraft.services.UserService;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -10,7 +10,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Optional;
+import ma.eventcraft.models.User;
+import ma.eventcraft.services.UserService;
 
 @Controller
 public class AuthController {
@@ -25,21 +26,6 @@ public class AuthController {
     @GetMapping("/login")
     public String showLoginForm() {
         return "login";
-    }
-
-    // Traite le formulaire de login
-    @PostMapping("/login")
-    public String loginUser(String email, String password, Model model) {
-        Optional<User> userOptional = userService.findByEmail(email);
-
-        // Vérifie que l'utilisateur existe et que le mot de passe correspond
-        if (userOptional.isEmpty() || !passwordEncoder.matches(password, userOptional.get().getPassword())) {
-            model.addAttribute("error", "Invalid email or password");
-            return "login";
-        }
-
-        // Rediriger vers une page sécurisée après connexion réussie
-        return "redirect:/home";
     }
 
     // Affiche le formulaire d'inscription
