@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Tickets</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" th:href="@{/imgs/ticketer_logo.svg}" />
+ <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Roboto', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#1a1a1d] text-white">
+    <!-- Navbar -->
+    <nav
+      class="md:py-5 py-3 z-50 md:px-8 px-3 bg-[#1A1A1D] fixed w-screen z-[999]"
+    >
+      <div
+        class="flex justify-between items-center gap-12 max-w-[1540px] m-auto w-full"
+      >
+        <a href="#" class="cursor-pointer">
+          <svg
+            class="md:h-9 h-7"
+            viewBox="0 0 127 38"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M22.7061 14.464H17.0319C16.9446 14.464 16.9446 14.464 16.9009 14.464C16.5518 14.4199 14.5876 14.2875 14.7185 16.6705C14.8495 19.2742 14.8931 27.3941 14.7185 28.718C14.544 29.9095 13.7583 18.0385 13.5837 15.7438C13.5837 15.5672 13.3655 15.4348 13.1909 15.479L11.4886 16.0527C11.4886 16.0527 10.1355 16.4057 10.7466 18.2592C11.1831 20.1568 13.0163 28.8062 13.0163 28.8062L9.39352 17.5531C9.30622 17.3324 9.04434 17.2001 8.8261 17.3324L8.04043 17.8179C8.04043 17.8179 6.8183 18.3474 7.8222 20.3333C8.82609 22.3191 11.5759 28.8062 13.0599 36.529C13.5401 38.2501 14.0638 38.2059 15.5479 37.6764C17.0319 37.1468 19.0833 36.6172 20.3491 35.9112C21.353 35.5581 22.0514 34.9844 22.7061 33.0427C23.3171 31.0569 26.6344 23.5106 25.8924 7.49145C25.8924 7.49145 25.9797 7.09429 25.194 6.5206C24.4083 5.94691 13.1036 0.254135 13.1036 0.254135C13.1036 0.254135 11.445 -0.716724 11.9251 1.13673C12.3616 2.99019 13.8019 9.56556 13.8019 9.56556C13.8019 9.56556 14.1948 12.1692 17.512 13.0518C20.8292 13.8903 22.7061 14.464 22.7061 14.464Z"
+              fill="#2A93D5"
+            />
+            <path
+              d="M0.53307 9.43316L4.94148 14.8612C5.11607 15.0818 5.29067 15.3025 5.42161 15.5231C5.63985 15.8761 6.16362 16.494 6.94928 16.3616C7.99683 16.1851 10.4847 15.7879 10.8776 15.6996C11.2704 15.6114 9.69909 15.6114 9.21897 15.2142C8.73884 14.8611 5.15972 9.12426 4.98513 8.72709C4.81054 8.37405 4.59231 8.06514 3.80665 8.02101C3.02099 7.97688 0.925897 8.02101 0.925897 8.02101C0.925897 8.02101 -0.863658 7.71209 0.53307 9.43316Z"
+              fill="#2A93D5"
+            />
+            <path
+              d="M5.59617 5.41734L9.30623 13.0518C9.30623 13.0518 9.78636 14.1992 11.1831 14.1992C12.5798 14.1992 15.6788 14.1992 15.6788 14.1992C15.6788 14.1992 14.6313 13.8462 14.0202 13.4931C13.4091 13.1401 13.0599 12.5664 12.798 11.9044C12.5362 11.2425 10.9212 5.54972 10.9212 5.54972C10.9212 5.54972 10.8776 4.88777 10.0482 4.66712C9.21894 4.44647 6.11995 4.00517 6.11995 4.00517C6.11995 4.00517 4.59227 3.34323 5.59617 5.41734Z"
+              fill="#2A93D5"
+            />
+            <path
+              d="M41.288 17.928V15.48H43.664V12.144H46.544V15.48H49.712V17.928H46.544V22.968C46.544 23.544 46.648 24 46.856 24.336C47.08 24.672 47.512 24.84 48.152 24.84C48.408 24.84 48.688 24.816 48.992 24.768C49.296 24.704 49.536 24.608 49.712 24.48V26.904C49.408 27.048 49.032 27.144 48.584 27.192C48.152 27.256 47.768 27.288 47.432 27.288C46.664 27.288 46.032 27.2 45.536 27.024C45.056 26.864 44.672 26.616 44.384 26.28C44.112 25.928 43.92 25.496 43.808 24.984C43.712 24.472 43.664 23.88 43.664 23.208V17.928H41.288Z"
+              fill="#EEF5FF"
+            />
+            <path d="M52.0082 15.48H54.8882V27H52.0082V15.48Z" fill="#EEF5FF" />
+            <path
+              d="M66.0665 18.936C65.7305 18.584 65.3785 18.304 65.0105 18.096C64.6425 17.888 64.2665 17.784 63.8825 17.784C63.3545 17.784 62.8825 17.88 62.4665 18.072C62.0505 18.264 61.6905 18.52 61.3865 18.84C61.0985 19.16 60.8745 19.528 60.7145 19.944C60.5705 20.36 60.4985 20.792 60.4985 21.24C60.4985 21.688 60.5705 22.12 60.7145 22.536C60.8745 22.952 61.0985 23.32 61.3865 23.64C61.6905 23.96 62.0505 24.216 62.4665 24.408C62.8825 24.6 63.3545 24.696 63.8825 24.696C64.7945 24.696 65.5385 24.336 66.1145 23.616L68.0345 25.68C67.7465 25.968 67.4105 26.216 67.0265 26.424C66.6585 26.632 66.2825 26.8 65.8985 26.928C65.5145 27.056 65.1465 27.144 64.7945 27.192C64.4425 27.256 64.1385 27.288 63.8825 27.288C63.0185 27.288 62.2025 27.144 61.4345 26.856C60.6665 26.568 60.0025 26.16 59.4425 25.632C58.8825 25.104 58.4345 24.472 58.0985 23.736C57.7785 22.984 57.6185 22.152 57.6185 21.24C57.6185 20.328 57.7785 19.504 58.0985 18.768C58.4345 18.016 58.8825 17.376 59.4425 16.848C60.0025 16.32 60.6665 15.912 61.4345 15.624C62.2025 15.336 63.0185 15.192 63.8825 15.192C64.6185 15.192 65.3545 15.336 66.0905 15.624C66.8425 15.896 67.4985 16.336 68.0585 16.944L66.0665 18.936Z"
+              fill="#EEF5FF"
+            />
+            <path
+              d="M69.7726 8.85599H72.6527V20.256L77.0927 15.48H80.7887L75.8447 20.712L81.1007 27H77.2846L72.7006 21.12H72.6527V27H69.7726V8.85599Z"
+              fill="#EEF5FF"
+            />
+            <path
+              d="M84.9673 22.248C85.0633 23.112 85.3993 23.784 85.9753 24.264C86.5513 24.744 87.2473 24.984 88.0633 24.984C88.7833 24.984 89.3833 24.84 89.8633 24.552C90.3593 24.248 90.7913 23.872 91.1593 23.424L93.2233 24.984C92.5513 25.816 91.7993 26.408 90.9673 26.76C90.1353 27.112 89.2633 27.288 88.3513 27.288C87.4873 27.288 86.6713 27.144 85.9033 26.856C85.1353 26.568 84.4713 26.16 83.9113 25.632C83.3513 25.104 82.9033 24.472 82.5673 23.736C82.2473 22.984 82.0873 22.152 82.0873 21.24C82.0873 20.328 82.2473 19.504 82.5673 18.768C82.9033 18.016 83.3513 17.376 83.9113 16.848C84.4713 16.32 85.1353 15.912 85.9033 15.624C86.6713 15.336 87.4873 15.192 88.3513 15.192C89.1513 15.192 89.8793 15.336 90.5353 15.624C91.2073 15.896 91.7753 16.296 92.2393 16.824C92.7193 17.352 93.0873 18.008 93.3433 18.792C93.6153 19.56 93.7513 20.448 93.7513 21.456V22.248H84.9673ZM90.8713 20.088C90.8553 19.224 90.5913 18.552 90.0793 18.072C89.5673 17.592 88.8553 17.352 87.9433 17.352C87.0793 17.352 86.3913 17.6 85.8793 18.096C85.3833 18.592 85.0793 19.256 84.9673 20.088H90.8713Z"
+              fill="#EEF5FF"
+            />
+            <path
+              d="M95.1005 17.928V15.48H97.4765V12.144H100.357V15.48H103.525V17.928H100.357V22.968C100.357 23.544 100.461 24 100.669 24.336C100.893 24.672 101.325 24.84 101.965 24.84C102.221 24.84 102.501 24.816 102.805 24.768C103.109 24.704 103.349 24.608 103.525 24.48V26.904C103.221 27.048 102.845 27.144 102.397 27.192C101.965 27.256 101.581 27.288 101.245 27.288C100.477 27.288 99.8445 27.2 99.3485 27.024C98.8685 26.864 98.4845 26.616 98.1965 26.28C97.9245 25.928 97.7325 25.496 97.6205 24.984C97.5245 24.472 97.4765 23.88 97.4765 23.208V17.928H95.1005Z"
+              fill="#EEF5FF"
+            />
+            <path
+              d="M108.077 22.248C108.173 23.112 108.509 23.784 109.085 24.264C109.661 24.744 110.357 24.984 111.173 24.984C111.893 24.984 112.493 24.84 112.973 24.552C113.469 24.248 113.901 23.872 114.269 23.424L116.333 24.984C115.661 25.816 114.909 26.408 114.077 26.76C113.245 27.112 112.373 27.288 111.461 27.288C110.597 27.288 109.781 27.144 109.013 26.856C108.245 26.568 107.581 26.16 107.021 25.632C106.461 25.104 106.013 24.472 105.677 23.736C105.357 22.984 105.197 22.152 105.197 21.24C105.197 20.328 105.357 19.504 105.677 18.768C106.013 18.016 106.461 17.376 107.021 16.848C107.581 16.32 108.245 15.912 109.013 15.624C109.781 15.336 110.597 15.192 111.461 15.192C112.261 15.192 112.989 15.336 113.645 15.624C114.317 15.896 114.885 16.296 115.349 16.824C115.829 17.352 116.197 18.008 116.453 18.792C116.725 19.56 116.861 20.448 116.861 21.456V22.248H108.077ZM113.981 20.088C113.965 19.224 113.701 18.552 113.189 18.072C112.677 17.592 111.965 17.352 111.053 17.352C110.189 17.352 109.501 17.6 108.989 18.096C108.493 18.592 108.189 19.256 108.077 20.088H113.981Z"
+              fill="#EEF5FF"
+            />
+            <path
+              d="M119.554 15.48H122.434V17.304H122.482C122.802 16.632 123.258 16.112 123.85 15.744C124.442 15.376 125.122 15.192 125.89 15.192C126.066 15.192 126.234 15.208 126.394 15.24C126.57 15.272 126.746 15.312 126.922 15.36V18.144C126.682 18.08 126.442 18.032 126.202 18C125.978 17.952 125.754 17.928 125.53 17.928C124.858 17.928 124.314 18.056 123.898 18.312C123.498 18.552 123.186 18.832 122.962 19.152C122.754 19.472 122.61 19.792 122.53 20.112C122.466 20.432 122.434 20.672 122.434 20.832V27H119.554V15.48Z"
+              fill="#EEF5FF"
+            />
+          </svg>
+        </a>
+        <div class="flex items-center gap-12">
+          <div class="flex gap-4">
+            <form
+              class="bg-[#eef5ff08] flex gap-3 backdrop-blur-lg hover:bg-[#eef5ff20] px-3 py-[7px] flex duration-300 rounded-full cursor-pointer"
+            >
+              <input
+                class="bg-[#fff0] ps-2 text-sm text-[#EEF5FF] font-semibold outline-none"
+                id="searchBar" 
+                placeholder="Search tickets..." 
+                type="text"
+                oninput="filterTickets()"
+              />
+              <button type="submit">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M21 21L16.65 16.65M11 6C13.7614 6 16 8.23858 16 11M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
+                    stroke="#EEF5FF"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linjoin="round"
+                  />
+                </svg>
+              </button>
+            </form>
+            <ul
+              class="flex fixed bottom-0 left-0 right-0 md:bg-[#FFFFFF00] bg-[#0c0c0c] md:relative justify-between items-center gap-0 md:gap-4"
+            >
+              <li
+                class="md:before:hidden before:absolute before:bottom-0 before:left-0 before:right-0 before:h-1 before:bg-a-400 relative justify-center p-[10px] md:p-[7px] flex hover:bg-none uppercase md:hover:bg-[#eef5ff20] duration-300 rounded-none w-full md:rounded-full cursor-pointer"
+              >
+                <a th:href="@{/home}" class="text-gray-300 hover:text-white">
+                <img
+                  th:src="@{/icons/home_icon.svg}"
+                  alt="Home"
+                  class="h-6 w-6" />
+              </a>
+              </li>
+              <li
+                class="md:before:hidden before:absolute before:bottom-0 before:left-0 before:right-0 before:h-1 before:bg-a-400 relative justify-center p-[10px] md:p-[7px] flex hover:bg-none uppercase md:hover:bg-[#eef5ff20] duration-300 rounded-none w-full md:rounded-full cursor-pointer"
+              >
+                   <a href="#" class="text-gray-300 hover:text-white">
+                <img
+                  th:src="@{/icons/shopping_icon.svg}"
+                  alt="Shopping"
+                  class="h-6 w-6" />
+              </a>
+              </li> 
+            </ul>
+          </div>
+          <ul class="md:flex hidden items-center gap-4">
+          </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Line between navbar and main content -->
+<div class="border-b-2" style="border-color: #1D2939; margin-top: 1rem;"></div> <!-- Add margin-top for spacing -->
+
+<!-- Main Content -->
+<main class="p-8 bg-[#1a1a1d] mt-20"> <!-- mt-6 to add spacing below the line -->
+  <hr style="border: 1px solid #00000066; margin: 5 0;"><br>
+  <h2 class="text-3xl font-bold mb-8 text-white text-center">My Tickets</h2>
+  <div id="ticketList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div th:each="ticket : ${tickets}" 
+           th:data-ticket-id="${ticket.id}"
+           th:data-event-id="${ticket.event.id}"
+           th:data-seat-category="${ticket.seatCategory.id}"
+           th:data-purchase-date="${ticket.purchaseDate}"
+           th:data-status="${ticket.status}"
+           th:data-quantity="${ticket.quantity}"
+           th:data-total-price="${ticket.totalPrice}"
+           th:data-created-at="${ticket.createdAt}"
+           th:data-updated-at="${ticket.updatedAt}"
+           class="ticket-item bg-black p-4 rounded-lg shadow-lg flex flex-col items-center justify-between cursor-pointer transition-transform transform hover:scale-105">
+          
+          <!-- Event Image -->
+          <img src="https://imgs.search.brave.com/kUE7BMAE8bJOhlVgsXQeUI8pdt1exZ7ruNTsliSY4aM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/cGl4YWJheS5jb20v/cGhvdG8vMjAxNS8x/MS8yMi8xOS8wNC9j/cm93ZC0xMDU2NzY0/XzY0MC5qcGc" 
+               alt="Event Image" class="w-full h-48 object-cover rounded-lg mb-4">
+          
+          <!-- Event Info -->
+          <div class="text-center text-white">
+              <h3 class="text-2xl font-bold mb-2" th:text="${'Event ID: ' + ticket.event.id}"></h3>
+              <p class="text-sm text-gray-400 mb-1" th:text="${'Seat Category: ' + ticket.seatCategory.id}"></p>
+              <p class="text-sm text-gray-400 mb-1" th:text="${'Purchase Date: ' + ticket.purchaseDate}"></p>
+              <p th:class="${ticket.status == 'Confirmed' ? 'text-blue-500' : (ticket.status == 'Cancelled' ? 'text-red-500' : 'text-gray-400')}"
+                 th:text="${ticket.status}" class="font-semibold mb-2"></p>
+
+              <p class="text-lg font-bold text-white">Qty: <span class="text-gray-400" th:text="${ticket.quantity}"></span></p>
+              <p class="text-lg font-bold text-white mb-4">Total Price: <span class="text-gray-400" th:text="${ticket.totalPrice}"></span></p>
+              
+              <!-- View Details Button -->
+              <button class="text-sm font-semibold text-[#EEF5FF] px-6 py-2 bg-[#2A93D5] rounded-full cursor-pointer select-none hover:bg-blue-700 transition-colors" 
+                      onclick="viewTicketDetails(event, this)">
+                  View Details
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" class="inline-block ml-2" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 15.5H7.5C6.10444 15.5 5.40665 15.5 4.83886 15.6722C3.56045 16.06 2.56004 17.0605 2.17224 18.3389C2 18.9067 2 19.6044 2 21M19 21V15M16 18H22M14.5 7.5C14.5 9.98528 12.4853 12 10 12C7.51472 12 5.5 9.98528 5.5 7.5C5.5 5.01472 7.51472 3 10 3C12.4853 3 14.5 5.01472 14.5 7.5Z" stroke="#EEF5FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+              </button>
+          </div>
+      </div>
+  </div>
+</main>
+
+
+    <!-- Ticket Cancelled Modal -->
+    <div id="ticketCancelledModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
+        <div class="bg-black p-6 rounded max-w-lg text-white">
+            <h2 class="text-2xl font-bold mb-4">Ticket Cancelled</h2>
+            <p id="cancelMessage" class="text-gray-400"></p>
+            <button onclick="closeModal('ticketCancelledModal')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg mt-4">
+                Close
+            </button>
+        </div>
+    </div>
+
+   <!-- Ticket Details Modal -->
+<div id="ticketDetailsModal" class="hidden fixed inset-0 bg-[#1a1a1d] bg-opacity-50 flex justify-center items-center">
+  <!-- Adjusted width and height to match typical ticket proportions -->
+  <div class="relative bg-black w-[850px] h-[380px] rounded-xl overflow-hidden shadow-2xl">
+      <!-- Decorative elements -->
+      <div class="absolute top-0 right-0 w-[180px] h-full bg-[#2A93D5] clip-path-diagonal"></div>
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#2A93D5] via-transparent to-[#2A93D5]"></div>
+      
+      <div class="flex h-full">
+          <!-- Left section with image and overlay -->
+          <div class="w-2/3 relative overflow-hidden p-8 flex flex-col justify-between">
+              <!-- Top section -->
+              <div>
+                  <div class="flex justify-between items-start mb-6">
+                      <div>
+                          <p class="text-[#2A93D5] text-sm font-medium mb-1">EventCraft Presents</p>
+                          <h2 class="text-4xl font-bold text-white mb-2">ADMIT ONE</h2>
+                          <p id="modalEventId" class="text-xl text-[#2A93D5]"></p>
+                      </div>
+                      <div class="flex items-center space-x-4">
+                          <div class="text-right">
+                              <p class="text-sm text-gray-400 mb-1">Status</p>
+                              <p id="modalStatus" class="px-4 py-1 bg-[#2A93D5]/20 rounded-full text-[#2A93D5] font-medium"></p>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Main ticket info -->
+                  <div class="grid grid-cols-2 gap-x-8 gap-y-4">
+                      <div>
+                          <h3 class="text-[#2A93D5] text-sm font-medium mb-1">SEAT DETAILS</h3>
+                          <p id="modalSeatCategory" class="text-white"></p>
+                          <p id="modalQuantity" class="text-white mt-1"></p>
+                      </div>
+                      <div>
+                          <h3 class="text-[#2A93D5] text-sm font-medium mb-1">PRICE</h3>
+                          <p id="modalTotalPrice" class="text-white text-xl font-bold"></p>
+                      </div>
+                      <div>
+                          <h3 class="text-[#2A93D5] text-sm font-medium mb-1">DATE</h3>
+                          <p id="modalPurchaseDate" class="text-white"></p>
+                      </div>
+                      <div>
+                          <h3 class="text-[#2A93D5] text-sm font-medium mb-1">TICKET ID</h3>
+                          <p id="modalTicketId" class="text-white"></p>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Bottom section -->
+              <div class="flex justify-between items-end">
+                  <div class="flex space-x-4">
+                      <div>
+                          <p id="modalCreatedAt" class="text-sm text-gray-400"></p>
+                          <p id="modalUpdatedAt" class="text-sm text-gray-400"></p>
+                      </div>
+                  </div>
+                  <button onclick="closeModal('ticketDetailsModal')" 
+                          class="text-sm font-semibold text-white px-6 py-2 bg-[#2A93D5] rounded-full hover:bg-[#2A93D5]/80 transition-colors">
+                      Close
+                  </button>
+              </div>
+          </div>
+
+          <!-- Right section with vertical content -->
+          <div class="w-1/3 relative bg-[#2A93D5]/10 border-l border-[#2A93D5]/20 flex flex-col items-center justify-center p-6">
+              <img src="https://www.gqmiddleeast.com/cloud/2022/10/11/elgrandetoto-gq-middle-east-cover-1.jpg" 
+                   class="w-full h-48 object-cover rounded-lg mb-4" alt="Event">
+              
+              <!-- Barcode-like design -->
+              <div class="w-full space-y-1">
+                  <div class="flex justify-between">
+                      <div class="h-8 w-1 bg-[#2A93D5]/60"></div>
+                      <div class="h-8 w-2 bg-[#2A93D5]/60"></div>
+                      <div class="h-8 w-1 bg-[#2A93D5]/60"></div>
+                      <div class="h-8 w-3 bg-[#2A93D5]/60"></div>
+                      <div class="h-8 w-2 bg-[#2A93D5]/60"></div>
+                      <div class="h-8 w-1 bg-[#2A93D5]/60"></div>
+                      <div class="h-8 w-2 bg-[#2A93D5]/60"></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<style>
+.clip-path-diagonal {
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  opacity: 0.1;
+}
+</style>
+
+    <script>
+        // Function to open ticket details modal
+        function viewTicketDetails(event, button) {
+            const ticketElement = button.closest('.ticket-item');
+            const modal = document.getElementById('ticketDetailsModal');
+
+            modal.classList.remove('hidden', 'opacity-0');
+            modal.classList.add('block', 'opacity-100');
+
+            document.getElementById('modalTicketId').textContent = ticketElement.dataset.ticketId;
+            document.getElementById('modalEventId').textContent = 'Event ID: ' + ticketElement.dataset.eventId;
+            document.getElementById('modalSeatCategory').textContent = 'Seat Category: ' + ticketElement.dataset.seatCategory;
+            document.getElementById('modalQuantity').textContent = 'Quantity: ' + ticketElement.dataset.quantity;
+            document.getElementById('modalPurchaseDate').textContent = 'Purchase Date: ' + ticketElement.dataset.purchaseDate;
+            document.getElementById('modalTotalPrice').textContent = 'Total Price: ' + ticketElement.dataset.totalPrice;
+            document.getElementById('modalCreatedAt').textContent = 'Created At: ' + ticketElement.dataset.createdAt;
+            document.getElementById('modalUpdatedAt').textContent = 'Updated At: ' + ticketElement.dataset.updatedAt;
+        }
+
+        // Function to close modals
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('block', 'opacity-100');
+            modal.classList.add('hidden', 'opacity-0');
+        }
+
+        // Function to cancel ticket
+        function cancelTicket(ticketId) {
+            // Here, you can add the logic to handle ticket cancellation
+            document.getElementById('ticketCancelledModal').classList.remove('hidden');
+            document.getElementById('ticketCancelledModal').classList.add('block');
+            document.getElementById('cancelMessage').textContent = 'Your ticket has been successfully cancelled.';
+        }
+
+        // Function to filter tickets
+        function filterTickets() {
+            const searchQuery = document.getElementById('searchBar').value.toLowerCase();
+            const tickets = document.querySelectorAll('.ticket-item');
+
+            tickets.forEach(ticket => {
+                const ticketDetails = ticket.textContent.toLowerCase();
+                if (ticketDetails.includes(searchQuery)) {
+                    ticket.classList.remove('hidden');
+                } else {
+                    ticket.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

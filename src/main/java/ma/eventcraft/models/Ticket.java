@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -35,4 +36,11 @@ public class Ticket {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date purchaseDate;
+
+    private Integer quantity;
+    private String status;
+    private Double totalPrice;
 }

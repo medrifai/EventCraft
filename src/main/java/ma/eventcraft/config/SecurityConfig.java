@@ -14,14 +14,14 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/signup", "/css/**", "/js/**").permitAll()
-                .anyRequest().authenticated()
+                .requestMatchers("/signup", "/css/**", "/js/**", "/my-ticket-page").permitAll() // Allow unauthenticated access to /my-ticket-page
+                .anyRequest().authenticated() // Require authentication for other pages
             )
             .formLogin(form -> form
-                .loginPage("/login")
-                .permitAll()
+                .loginPage("/login") // Set the correct login page URL
+                .permitAll() // Allow everyone to access the login page
             );
-        
+
         return http.build();
     }
 
