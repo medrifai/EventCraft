@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${event.title != null ? event.title : 'Event Details'}">Event Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/event-details.css}">
+</head>
+<body class="bg-[#0f1420] text-white min-h-screen">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-[#0f1420]/95 border-b border-gray-800">
+        <nav class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex items-center">
+                <img th:src="@{/resources/static/imgs/ticketer_logo.svg}" alt="Ticketer" class="h-8">
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- Event Image and Details -->
+            <div class="lg:col-span-2">
+                <div class="event-gallery">
+                    <!-- Event Image -->
+                    <div class="main-image relative rounded-lg overflow-hidden mb-6">
+                        <img th:src="@{${event.imageUrl}}" th:alt="${event.title}" class="w-full aspect-video object-cover">
+                    </div>
+                    <!-- Thumbnail -->
+                    <div class="thumbnails flex gap-4">
+                        <div class="thumbnail active">
+                            <img th:src="@{${event.thumbnailUrl}}" 
+                                 class="rounded-lg w-24 h-24 object-cover cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Title and Description -->
+                <div class="mb-8">
+                    <h1 th:text="${event.title}" 
+                        class="text-4xl font-bold mb-3 text-white">Event Title</h1>
+                    <p th:text="${event.description}" 
+                       class="text-gray-400 text-lg">Event Description</p>
+                </div>
+            </div>
+
+            <!-- Booking Panel -->
+            <div class="bg-[#1a1f2e] p-6 rounded-lg h-fit">
+                <!-- Countdown Timer -->
+                <div class="mb-6">
+                    <div class="flex items-center space-x-2">
+                        <i class="far fa-clock text-gray-400"></i>
+                        <div>
+                            <div id="countdown" class="text-xl font-medium">
+                                <span id="days">01</span>d 
+                                <span id="hours">23</span>h 
+                                <span id="minutes">23</span>min 
+                                <span id="seconds">49</span>sec
+                            </div>
+                            <div class="text-gray-400 text-sm" 
+                                 th:text="${#dates.format(event.startsAt, 'EEE dd MMM yyyy')}">Event Date</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Start Date -->
+                <div id="eventStartDate" class="hidden" th:data-date="${event.startsAt}"></div>
+
+                <!-- Location -->
+                <div class="flex items-center space-x-2 text-gray-400 mb-4">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span th:text="${event.location}">Location</span>
+                </div>
+
+                <!-- Seat Category Selector -->
+                <!-- <div class="mb-6">
+                    <label class="block text-gray-400 mb-2">Seat Category</label>
+                    <div class="relative">
+                        <select id="seatCategory" class="w-full bg-[#0f1420] text-white p-3 rounded-lg appearance-none">
+                            <option th:each="category : ${event.seatCategories}"
+                                    th:value="${category.id}"
+                                    th:text="${category.name + ' - ' + category.price + ' MAD'}"
+                                    th:data-price="${category.price}">
+                            </option>
+                        </select>
+                        <div class="absolute right-3 top-1/2 -translate-y-1/2">
+                            <i class="fas fa-chevron-down text-gray-400"></i>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Quantity Selector -->
+                <div class="mb-6">
+                    <label class="block text-gray-400 mb-2">Quantity</label>
+                    <div class="flex items-center justify-between bg-[#0f1420] rounded-lg p-1 border border-gray-700">
+                        <button type="button" id="decrease" class="quantity-btn">
+                            <i class="fas fa-minus text-sm"></i>
+                        </button>
+                        <span id="quantity" class="text-lg font-medium">1</span>
+                        <button type="button" id="increase" class="quantity-btn">
+                            <i class="fas fa-plus text-sm"></i>
+                        </button>
+                    </div>
+                    <div class="text-green-500 text-sm mt-2">In Stock</div>
+                </div>
+
+                <!-- Total Price -->
+                <div class="flex justify-between items-center mb-6">
+                    <span class="text-gray-400">Total price</span>
+                    <span id="total" class="text-xl font-bold">99 MAD</span>
+                </div>
+
+                <!-- Buy Button -->
+                <button class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition">
+                    BUY NOW
+                </button>
+            </div>
+        </div>
+
+        <!-- Similar Events -->
+        <div class="mt-16">
+            <h2 class="text-2xl font-bold mb-6">Similar Events</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div th:each="similarEvent : ${relatedEvents}" class="bg-[#1a1f2e] rounded-lg overflow-hidden">
+                    <img th:src="@{${similarEvent.imageUrl}}" 
+                         th:alt="${similarEvent.title}" 
+                         class="w-full aspect-video object-cover">
+                    <div class="p-4">
+                        <h3 th:text="${similarEvent.title}" class="font-semibold mb-2">Event Title</h3>
+                        <div class="flex items-center text-gray-400 text-sm">
+                            <i class="far fa-calendar mr-2"></i>
+                            <span th:text="${#dates.format(similarEvent.startsAt, 'dd-MM-yyyy')}">Date</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script th:src="@{/js/event-details.js}"></script>
+</body>
+</html>

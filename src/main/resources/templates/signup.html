@@ -1,93 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" th:href="@{/imgs/ticketer_logo.svg}" />
     <title>Signup</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="flex items-center justify-center min-h-screen bg-gray-100">
-<div class="w-full max-w-lg bg-white rounded-lg shadow-md p-8">
-    <h2 class="text-2xl font-bold text-center text-gray-800">Create an Account</h2>
-    <form action="/signup" method="POST" class="mt-6">
+  </head>
+  <body class="flex items-center justify-center min-h-screen bg-gray-900">
+    <div
+      class="w-full max-w-lg bg-gray-800 rounded-lg shadow-xl p-8 border border-gray-700">
+      <h2 class="text-2xl font-bold text-center text-white mb-2">
+        Create an Account
+      </h2>
+      <p class="text-center text-gray-400 mb-6">
+        Join us to get full access to our platform
+      </p>
 
+      <form th:action="@{/signup}" method="POST" class="mt-6 space-y-6">
         <!-- First Name -->
-        <div class="mb-4">
-            <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
-            <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    required
-                    class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+        <div>
+          <label for="firstName" class="block text-sm font-medium text-gray-300"
+            >First Name</label
+          >
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            required
+            class="w-full mt-1 px-4 py-2 bg-gray-700 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400" />
         </div>
 
         <!-- Last Name -->
-        <div class="mb-4">
-            <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
-            <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    required
-                    class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+        <div>
+          <label for="lastName" class="block text-sm font-medium text-gray-300"
+            >Last Name</label
+          >
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            required
+            class="w-full mt-1 px-4 py-2 bg-gray-700 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400" />
         </div>
 
         <!-- Email -->
-        <div class="mb-4">
-            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-            <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-300"
+            >Email</label
+          >
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="w-full mt-1 px-4 py-2 bg-gray-700 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400" />
         </div>
 
         <!-- Phone Number -->
-        <div class="mb-4">
-            <label for="phoneNumber" class="block text-sm font-medium text-gray-700">Phone Number</label>
-            <input
-                    type="tel"
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    required
-                    class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+        <div>
+          <label
+            for="phoneNumber"
+            class="block text-sm font-medium text-gray-300"
+            >Phone Number</label
+          >
+          <input
+            type="tel"
+            id="phoneNumber"
+            name="phoneNumber"
+            required
+            class="w-full mt-1 px-4 py-2 bg-gray-700 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400" />
         </div>
 
         <!-- Password -->
-        <div class="mb-4">
-            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-            <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    required
-                    class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-300"
+            >Password</label
+          >
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            class="w-full mt-1 px-4 py-2 bg-gray-700 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400" />
         </div>
 
         <!-- Confirm Password -->
-        <div class="mb-4">
-            <label for="confirm_password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
-            <input
-                    type="password"
-                    id="confirm_password"
-                    name="confirm_password"
-                    required
-                    class="w-full mt-1 px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+        <div>
+          <label
+            for="confirm_password"
+            class="block text-sm font-medium text-gray-300"
+            >Confirm Password</label
+          >
+          <input
+            type="password"
+            id="confirm_password"
+            name="confirm_password"
+            required
+            class="w-full mt-1 px-4 py-2 bg-gray-700 border border-gray-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400" />
         </div>
 
         <!-- Submit Button -->
         <button
-                type="submit"
-                class="w-full px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2">
-            Sign Up
+          type="submit"
+          class="w-full px-4 py-3 mt-6 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition duration-200 ease-in-out transform hover:-translate-y-0.5">
+          Create Account
         </button>
-    </form>
+      </form>
 
-    <p class="mt-4 text-sm text-gray-600 text-center">
-        Already have an account? <a href="/login" class="text-blue-500 hover:underline">Login here</a>.
-    </p>
-</div>
-</body>
+      <p class="mt-6 text-sm text-gray-400 text-center">
+        Already have an account?
+        <a
+          th:href="@{/login}"
+          class="text-blue-400 hover:text-blue-300 hover:underline font-medium">
+          Login here
+        </a>
+      </p>
+    </div>
+  </body>
 </html>

@@ -6,7 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.Vector;
+import java.util.List;
+import java.util.ArrayList;
 
 @Data
 @NoArgsConstructor
@@ -29,15 +30,15 @@ public class Event {
     @JoinColumn(name = "organizer_id", referencedColumnName = "id", nullable = false)
     private User organizer;
 
-    @ManyToOne(fetch = FetchType.LAZY)  // Relation many-to-one avec EventCategory
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
     private EventCategory category;
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Vector<SeatCategory> seatCategories;
+    private List<SeatCategory> seatCategories = new ArrayList<>();
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Vector<Ticket> tickets;
+    private List<Ticket> tickets = new ArrayList<>();
 
     @Column(nullable = false)
     private Boolean isSelling;
@@ -47,6 +48,11 @@ public class Event {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date endsAt;
+        @Column(name = "image_url")
+    private String imageUrl;
+
+    @Column(name = "thumbnail_url")
+    private String thumbnailUrl;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(updatable = false)

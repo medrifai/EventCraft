@@ -5,10 +5,12 @@ import ma.eventcraft.models.EventCategory;
 import ma.eventcraft.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
@@ -19,7 +21,17 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findByCategory(EventCategory category);
 
     List<Event> findByOrganizer(User organizer);
+    // @Query("SELECT e FROM Event e LEFT JOIN FETCH e.category WHERE e.id = :id")
+    // Optional<Event> findEventWithDetails(Long id);
 
+    @Query("SELECT e FROM Event e LEFT JOIN FETCH e.category WHERE e.id = :id")
+    Optional<Event> findEventWithDetails(@Param("id") Long id);
+
+    @Query("SELECT e FROM Event e WHERE e.category.id = :categoryId AND e.id != :eventId ORDER BY e.startsAt DESC")
+    List<Event> findByCategoryIdAndIdNotOrderByStartsAtDesc(
+        @Param("categoryId") Long categoryId,
+        @Param("eventId") Long eventId
+    );
     List<Event> findByTitleContainingIgnoreCase(String keyword);
 
     List<Event> findByIsSellingTrue();
