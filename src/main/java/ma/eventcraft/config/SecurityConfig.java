@@ -14,36 +14,26 @@ import ma.eventcraft.services.CustomUserDetailsService;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    
+
     @Autowired
     private CustomUserDetailsService userDetailsService;
-    
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .userDetailsService(userDetailsService)
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                    "/static/**",
-                    "/imgs/**",
-                    "/icons/**",
-                    "/css/**",
-                    "/js/**",
-                    "/login",
-                    "/signup"
-                ).permitAll()
+                .requestMatchers("/static/**", "/events/**", "/login", "/signup")
+                .permitAll()  // Allow access to static resources
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
                 .loginPage("/login")
-                .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/home", true)
-                .failureUrl("/login?error")
                 .permitAll()
             )
             .logout(logout -> logout
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout")
                 .permitAll()
             );
 
@@ -52,6 +42,6 @@ public class SecurityConfig {
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder();  // This will provide the password encoder for Spring Security
     }
 }

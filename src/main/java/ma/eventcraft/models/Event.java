@@ -1,24 +1,13 @@
 package ma.eventcraft.models;
 
-import java.util.Date;
-import java.util.Vector;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 
 @Data
 @NoArgsConstructor
@@ -37,19 +26,19 @@ public class Event {
     private String description;
     private String location;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organizer_id", referencedColumnName = "id", nullable = false)
     private User organizer;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
     private EventCategory category;
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Vector<SeatCategory> seatCategories;
+    private List<SeatCategory> seatCategories = new ArrayList<>();
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Vector<Ticket> tickets;
+    private List<Ticket> tickets = new ArrayList<>();
 
     @Column(nullable = false)
     private Boolean isSelling;
@@ -59,6 +48,11 @@ public class Event {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date endsAt;
+        @Column(name = "image_url")
+    private String imageUrl;
+
+    @Column(name = "thumbnail_url")
+    private String thumbnailUrl;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(updatable = false)
